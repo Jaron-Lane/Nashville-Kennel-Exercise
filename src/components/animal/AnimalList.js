@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from "react"
 import { AnimalContext } from "./AnimalProvider"
+import { LocationContext } from "../location/LocationProvider"
+import { CustomerContext } from "../customer/CustomerProvider"
 import { Animal } from "./Animal"
 
 
 export const AnimalsList = () => {
     // This state changes when `getAnimals()` is invoked below
     const { animals, getAnimals } = useContext(AnimalContext)
+    const { locations, getLocations } = useContext(LocationContext)
+    const { customers, getCustomers } = useContext(CustomerContext)
 
     /*
         What's the effect this is reponding to? Component was
@@ -15,17 +19,11 @@ export const AnimalsList = () => {
     useEffect(() => {
         console.log("AnimalList: Initial render before data")
         getAnimals()
+        .then(getCustomers)
+        .then(getLocations)
     }, [])
 
-    /*
-        This effect is solely for learning purposes. The effect
-        it is responding to is that the location state changed.
-    */
-    useEffect(() => {
-        console.log("AnimalsList: Animal state changed")
-        console.log(animals)
-    }, [animals])
-
+   
     return (
         <div className="animals">
         {
