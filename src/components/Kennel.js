@@ -2,6 +2,12 @@ import React from "react"
 import { LocationList } from "./location/LocationList"
 import { LocationProvider } from "./location/LocationProvider"
 import "./Kennel.css"
+import { EmployeeProvider } from "./employee/EmployeeProvider"
+import { EmployeeList } from "./employee/EmployeeList"
+import { AnimalProvider } from "./animal/AnimalProvider"
+import { AnimalsList } from "./animal/AnimalList"
+import { CustomerProvider } from "./customer/CustomerProvider"
+import { CustomerList } from "./customer/CustomerList"
 
 export const Kennel = () => (
     <>
@@ -12,5 +18,20 @@ export const Kennel = () => (
         <LocationProvider>
             <LocationList />
         </LocationProvider>
+
+        <h2>Animals</h2>
+        <AnimalProvider>
+            <AnimalsList />
+        </AnimalProvider>
+
+        <h2>Employees</h2>
+        <EmployeeProvider>
+            <EmployeeList />
+        </EmployeeProvider>
+
+        <h2>Customers</h2>
+        <CustomerProvider>
+            <CustomerList />
+        </CustomerProvider>
     </>
 )
