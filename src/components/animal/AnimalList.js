@@ -6,18 +6,18 @@ import { Animal } from "./Animal"
 import "./Animal.css"
 
 
-export const AnimalsList = () => {
+export const AnimalsList = (props) => {
     // This state changes when `getAnimals()` is invoked below
-    const { animals, getAnimals } = useContext(AnimalContext)
     const { locations, getLocations } = useContext(LocationContext)
     const { customers, getCustomers } = useContext(CustomerContext)
+    const { animals, getAnimals } = useContext(AnimalContext)
 
     /*
         Component was "mounted" to the DOM. React renders blank HTML first,
         then gets the data, then re-renders.
     */
     useEffect(() => {
-        console.log("AnimalList: Initial render before data")
+        console.log("AnimalsList: Initial render before data")
         getLocations()
         .then(getCustomers)
         .then(getAnimals)
