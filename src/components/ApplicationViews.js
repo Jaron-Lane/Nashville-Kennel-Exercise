@@ -1,14 +1,15 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { LocationProvider } from "./location/LocationProvider"
-import { AnimalProvider } from "./animal/AnimalProvider"
-import { EmployeeProvider } from "./employee/EmployeeProvider"
-import { CustomerProvider } from "./customer/CustomerProvider"
 import { LocationList } from "./location/LocationList"
+import { AnimalProvider } from "./animal/AnimalProvider"
 import { AnimalsList } from "./animal/AnimalList"
+import { AnimalForm } from "./animal/AnimalForm"
+import { EmployeeProvider } from "./employee/EmployeeProvider"
 import { EmployeeList } from "./employee/EmployeeList"
-import { CustomerList } from "./customer/CustomerList"
 import { EmployeeForm } from "./employee/EmployeeForm"
+import { CustomerProvider } from "./customer/CustomerProvider"
+import { CustomerList } from "./customer/CustomerList"
 
 
 export const ApplicationViews = (props) => {
@@ -26,9 +27,14 @@ export const ApplicationViews = (props) => {
                 <LocationProvider>
                     <CustomerProvider>
                         {/* Render the animal list when http://localhost:3000/animals */}
-                        <Route path="/animals">
-                            <AnimalsList />
-                        </Route>
+                        <Route exact path="/animals" render={
+                            props => <AnimalsList {...props} />
+                        } />
+
+                        <Route exact path="/animals/create" render={
+                            props => <AnimalForm {...props} />
+                        } />
+
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
