@@ -23,12 +23,14 @@ export const AnimalsList = (props) => {
         .then(getAnimals)
     }, [])
 
+   
+
    return ( 
        <div className="animals"> 
             {animals.map(animal => {
                 const owner = customers.find(c => c.id === animal.customerId)
                 const clinic = locations.find(l => l.id === animal.locationId)
-
+                console.log({owner,clinic})
                 return <Animal key={animal.id}
                             location={clinic}
                             customer={owner}
