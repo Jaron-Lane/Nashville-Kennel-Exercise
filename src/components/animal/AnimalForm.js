@@ -1,26 +1,27 @@
 import React, { useContext, useEffect, useRef } from "react"
 import { LocationContext } from "../location/LocationProvider"
 import { AnimalContext } from "./AnimalProvider"
+import "./Animal.css"
 
 export const AnimalForm = (props) => {
     // Get the context from the LocationProvider
     const { locations, getLocations } = useContext(LocationContext)
-    const { addAnimal } = useContext(AnimalContext)
+    const { addAnimal, getAnimals } = useContext(AnimalContext)
 
     // Need useRefs for input fields
     const name = useRef(null)
     const breed = useRef(null)
     const location = useRef(null)
-    // const customer = useRef(null)
+    
 
     // Get the location state
     useEffect(() => {
-        getLocations()
+        getAnimals().then(getLocations)
     }, [])
 
     const constructNewAppointment = () => {
         const locationId = parseInt(location.current.value)
-        // const customerId = parseInt(customer.current.value)
+        const customerId = parseInt(localStorage.getItem("kennel_customer"))
 
         if (locationId === 0) {
             window.alert("Please select a location")
@@ -29,7 +30,7 @@ export const AnimalForm = (props) => {
                 name: name.current.value,
                 breed: breed.current.value,
                 locationId,
-                // customerId
+                customerId
             })
             .then(() => props.history.push("/animals"))
         }
