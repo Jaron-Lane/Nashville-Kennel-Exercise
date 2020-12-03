@@ -18,6 +18,7 @@ export const AnimalsList = (props) => {
     */
     useEffect(() => {
         console.log("AnimalsList: Initial render before data")
+        console.log({animals, customers, locations})
         getLocations()
         .then(getCustomers)
         .then(getAnimals)
@@ -26,6 +27,11 @@ export const AnimalsList = (props) => {
    
 
    return ( 
+       <>
+       <h1>Animals</h1>
+            <button onClick={() => props.history.push("/animals/create")}>
+                Make Appointment
+            </button>
        <div className="animals"> 
             {animals.map(animal => {
                 const owner = customers.find(c => c.id === animal.customerId)
@@ -38,4 +44,5 @@ export const AnimalsList = (props) => {
             })
             }
         </div>
+        </>
    )}
